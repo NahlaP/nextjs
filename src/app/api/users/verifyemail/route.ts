@@ -70,7 +70,17 @@ export async function POST(request: NextRequest) {
       message: "Email verified successfully",
       success: true,
     });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+  // } catch (error: any) {
+  //   return NextResponse.json({ error: error.message }, { status: 500 });
+  // }
+  } catch (error: unknown) {
+      let errorMessage = "Something went wrong";
+    
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+    
+      return NextResponse.json({ error: errorMessage }, { status: 500 });
+    }
+    
 }
