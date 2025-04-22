@@ -61,7 +61,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -122,4 +122,10 @@ const VerifyEmailPage = () => {
   );
 };
 
-export default VerifyEmailPage;
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmailPage />
+    </Suspense>
+  );
+}
