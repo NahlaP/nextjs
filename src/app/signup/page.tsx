@@ -25,15 +25,29 @@ const onSignup=async()=>{
     console.log("signup success",response.data);
     router.push("/login");
 
-  }catch(error:any){
-    console.log("signup failed",error.message);
+//   }catch(error:any){
+//     console.log("signup failed",error.message);
     
-toast.error(error.message);
-  }finally{
-    setLoading(false);
-  }
+// toast.error(error.message);
+//   }finally{
+//     setLoading(false);
+//   }
 
+// }
+
+} catch (error) {
+  if (axios.isAxiosError(error)) {
+    toast.error(error.response?.data?.error || "Signup failed");
+    console.error("Signup failed", error.message);
+  } else {
+    toast.error("Something went wrong");
+    console.error(error);
+  }
+} finally {
+  setLoading(false);
 }
+};
+
 
 useEffect(()=>{
 if(user.email.length>0 && user.password.length>

@@ -21,12 +21,22 @@ try {
 await axios.get('/api/users/logout')
 toast.success('Logout successful')  
 router.push('/')
-} catch (error:any) {
-  console.log(error.message);
-  toast.error(error.message)
+// } catch (error:any) {
+//   console.log(error.message);
+//   toast.error(error.message)
   
   
+// }
+} catch (error: unknown) {  // Change 'any' to 'unknown'
+  if (error instanceof Error) {
+    console.log(error.message);  // Access error message safely
+    toast.error(error.message);  // Show error message in the toast
+  } else {
+    console.log("An unknown error occurred");
+    toast.error("An unknown error occurred");  // Handle unknown errors
+  }
 }
+
   }
   return (
     <header className="w-full flex items-center justify-between px-6 py-4 bg-gray- shadow-md">
